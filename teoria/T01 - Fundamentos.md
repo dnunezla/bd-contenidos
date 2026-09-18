@@ -68,6 +68,10 @@ flowchart TD
 >  - Una red social, representando esta entidad al usuario
 >  - Un hospital, representando esta entidad al paciente
 
+
+#nota1 depende del contexto 
+
+
 ## 2. Modelos de datos
 
 ### 2.1. Definición
@@ -78,7 +82,13 @@ En esencia, un modelo de datos proporciona un diagrama simplificado o una **repr
 Un **modelo de datos** es una notación para describir datos o información. La descripción generalmente consta de tres partes:
 
 1. **Estructura de los datos**. Es posible que estés familiarizado con herramientas en lenguajes de programación como C o Java para describir la estructura de los datos utilizados por un programa: arrays y estructuras u objetos, por ejemplo. En el mundo de las bases de datos, hacen referencia a las **construcciones** que se utilizan para **definir** la estructura o **esquema de la base de datos**. Estas construcciones normalmente incluyen **elementos y sus tipos de datos**, así como **grupos** de elementos (por ejemplo , entidad, registro, tabla) y **relaciones** entre dichos grupos.
+
+   #nota2 el modelo relacional  se basa simplemente en una tabla
+
 2. **Operaciones sobre los datos**. En los lenguajes de programación, las operaciones sobre los datos son generalmente cualquier cosa que se pueda programar. En los modelos de datos de bases de datos, usualmente hay un **conjunto limitado de operaciones** que se pueden realizar. Generalmente se nos permite realizar un conjunto limitado de _consultas_,operaciones que recuperan información, y _modificaciones_, operaciones que cambian la base de datos. Esta limitación no es una debilidad, sino una **fortaleza**. Al limitar las operaciones, es posible que los **programadores describan las operaciones de la base de datos a un nivel muy alto**, y aun así hacer que el **sistema de gestión de bases de datos implemente las operaciones de manera eficiente**. En comparación, generalmente es mucho más difícil optimizar programas en lenguajes convencionales como C de forma automática.
+
+   #nota3 insertar, consultar, modificar y borrar OPERACIONES BASICAS
+   
 3. **Restricciones sobre los datos**. Los modelos de datos de bases de datos usualmente tienen una forma de describir **limitaciones sobre los datos considerados válidos**. Estas restricciones pueden ir desde simples condiciones, por ejemplo, "un día de la semana es un entero entre 1 y 7" o "una película tiene como máximo un título", hasta algunas limitaciones muy complejas. Estas restricciones **deben aplicarse en todo momento** para asegurar la **integridad de la base de datos**: no contiene datos inválidos.
 
 ### 2.2. Evolución de los modelos de datos
@@ -583,6 +593,8 @@ Para entender su importancia, es útil recordar qué significa cada letra del ac
     
 - **D - Durabilidad (Durability):** Una vez que una transacción se ha completado con éxito (se ha confirmado), sus cambios son permanentes y deben sobrevivir a cualquier fallo posterior del sistema, como un corte de energía o un reinicio del servidor.
     
+
+#nota4 principios importates
 
 Estas propiedades son esenciales para mantener la **integridad y confiabilidad** de los datos en aplicaciones críticas como sistemas bancarios, comercio electrónico y sistemas de reservaciones.
 

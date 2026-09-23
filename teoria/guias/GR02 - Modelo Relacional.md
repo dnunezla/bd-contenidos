@@ -2,7 +2,11 @@
 
 > **Objetivo de esta guía**: repasar en poco tiempo los conceptos esenciales del modelo relacional. Cada sección va de la idea intuitiva al detalle formal, con ejemplos mínimos. Al final tienes un glosario-chuleta y preguntas de autoevaluación.
 
+
 ---
+#nota5 ERRORES FRECUENTES: Duplicados, incons.mayusculas, incons.tiempo, faltan datos, dos artistas en una cancion
+
+
 
 ## 0. ¿De dónde viene todo esto?
 
@@ -61,16 +65,20 @@ ASIGNATURA = {
 
 - **Esquema de relación**: $R(A_1, A_2, \dots, A_n)$. Es la *estructura*: nombre de la relación + sus atributos. Ej.: $CLIENTE(id, nombre, dirección, teléfono)$.
 - **Grado**: número de atributos. CLIENTE tiene grado 4.
-- **Estado (o instancia)**: el conjunto *actual* de tuplas, $r(R)$. Cambia cada vez que se modifican los datos; el esquema, no.
+- **Estado (o instancia)**: el conjunto *actual* de tuplas, $r(R)$. Cambia cada vez que se modifican los datos; el esquema, no. #nota6 si aumentan la cantidad de datos, es dinámico
 - **Cardinalidad**: número de tuplas del estado actual.
 - **Dominio**: conjunto de valores válidos de un atributo. Tiene una definición lógica ("teléfonos válidos de 9 dígitos") y un tipo de datos/formato asociado. Un mismo dominio puede usarse en varios atributos con papeles distintos: el dominio *Fecha* puede dar lugar a los atributos *fechaFactura* y *fechaPago*.
 - **Tupla**: conjunto **ordenado** de valores, uno por atributo. Ej.: (632895, 'John Smith', '101 Main St.', '600123456').
-
+  #nota8 grado: numero de columnas y cardinalidad: numero de filas
 ### 1.4. Características de las relaciones
 
 1. **Las tuplas NO están ordenadas.** Una relación es un conjunto: no hay "primera fila" ni "última fila", aunque las dibujemos en forma de tabla.
 2. **No hay tuplas duplicadas.** Dado que una relación es un conjunto, todos sus elementos son distintos: dos tuplas no pueden coincidir en *todos* sus valores.
-3. **Los atributos (y los valores dentro de la tupla) SÍ están ordenados** en la definición formal $R(A_1, \dots, A_n)$.
+3. **Los atributos (y los valores dentro de la tupla) SÍ están ordenados** en la definición formal $R(A_1, \dots, A_n)$. 
+
+#nota7 los atributos dan lugar a que las tuplas no deban tener un orden determinado, se identifican los campos gracias a los atributos (por ejemplo como sabe el modelo cual es el artista y cual rs el nombre de la cancion etc)
+
+
 4. Los valores de una tupla deben ser **atómicos** (indivisibles): nada de listas o conjuntos como valor.
 5. Se admite el valor **NULL** para representar información desconocida, no disponible o inaplicable... pero conviene **evitarlo** en la medida de lo posible al diseñar.
 

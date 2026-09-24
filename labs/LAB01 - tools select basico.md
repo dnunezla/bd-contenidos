@@ -570,7 +570,12 @@ Utiliza el operador not para seleccionar las canciones (solo las columnas `titul
 
 Solución:
 ```sql
-
+select 
+  titulo,
+  genero,
+  pais
+from cancion
+where not genero = 'Rap';
 ```
 
 | titulo                     | genero | pais           |
@@ -600,7 +605,7 @@ Solución:
 | Sweet Child O' Mine        | Rock   | Estados Unidos |
 | Everlong                   | Rock   | Estados Unidos |
 | Hotel California           | Rock   | Estados Unidos |
-#nota
+#notaERROR en esta parte hay algo raro
 *(se muestran las 25 primeras filas de un total de 58)*
 
 ---
@@ -608,10 +613,15 @@ Solución:
 ### Ejercicio 6 - WHERE operador OR exclusivo
 
 El operador `OR` de SQL es un operador ‘o inclusivo’: se ejecuta correctamente si una o ambas condiciones son verdaderas. SQL no proporciona un operador específico para el operador ‘o exclusivo’, que es verdadero si solo una de las condiciones es verdadera, pero se puede lograr el mismo efecto utilizando `AND`, `OR` y `NOT`. Escribe una consulta para seleccionar las canciones (`cancion`) que estén en español (`idioma` = 'ES') o que se hayan publicado en España (`pais`), pero no ambas cosas.
-
+ #nota9 (a and notB) or (notA and b)
 Solución:
 ```sql
-
+select 
+  titulo,
+  idioma,
+  pais
+from cancion
+where idioma = 'ES' and not pais= 'España' or not idioma = 'ES' and pais= 'España'
 ```
 
 | titulo           | idioma | pais           |
@@ -719,7 +729,10 @@ Escribe una consulta que calcule y devuelva una columna llamada `porcentaje_me_g
 
 Solución:
 ```sql
-
+select 
+  round(me_gusta*100.0 / reproducciones , 1) as porcentaje_me_gusta
+from cancion
+limit 10;
 ```
 
 | porcentaje_me_gusta |
@@ -786,7 +799,9 @@ Escribe una consulta que calcule y devuelva una columna llamada `que_donde` que 
 
 Solución:
 ```sql
-
+select distinct
+  genero||' '||pais as que_donde
+  from cancion;
 ```
 
 | que_donde           |

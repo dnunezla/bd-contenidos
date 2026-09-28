@@ -194,6 +194,8 @@ La regla: el valor de la FK en $R_1$ debe ser
 1. un valor de PK **que exista** en $R_2$, o
 2. **NULL** (y en ese caso la FK no puede formar parte de la PK de $R_1$).
 
+#nota11 NULO ES AUSENCIA DE VALOR, ¿nulo = nulo? = es nulo, algo que desconozco su valor es igual a algo que desconozco su valor?, pues lo desconozco
+
 **Ejemplo en EMPRESA:**
 - EMPLEADO.dpto → DEPARTAMENTO.numero (todo empleado pertenece a un departamento existente; relación N:1)
 - EMPLEADO.supervisor → EMPLEADO.dni (¡una FK puede apuntar a la *misma* relación!). Admite NULL: hay empleados sin supervisor.
@@ -303,12 +305,13 @@ En la práctica, **ningún SGBDR comercial las cumple al 100%** (Oracle, MySQL, 
 | RESTRICT / CASCADE / SET NULL / SET DEFAULT | Acciones posibles al violar la integridad referencial |
 
 ---
+#nota10 CONTIENE e INTERPRETA definen relaciones muchos a muchos N:M
 
 ## ✅ Autoevaluación rápida
 
 1. ¿Cuál es la diferencia entre *esquema* y *estado* de una relación?
 2. ¿Por qué una relación no puede tener tuplas duplicadas?
-3. En $COCHE$(estado, matricula, numSerie, marca, modelo, año), ¿por qué {numSerie, marca} es superclave pero no clave?
+3. En $COCHE$(estado, matricula, numSerie, marca, modelo, año), ¿por qué {numSerie, marca} es superclave pero no clave? 
 4. ¿Puede un atributo de la clave primaria valer NULL? ¿Y una clave externa?
 5. ¿Qué restricciones puede violar un INSERT? ¿Y un DELETE?
 6. Si borramos un departamento referenciado por empleados, ¿qué ocurre con `ON DELETE SET NULL`? ¿Qué requisito debe cumplir la FK?
@@ -318,3 +321,10 @@ En la práctica, **ningún SGBDR comercial las cumple al 100%** (Oracle, MySQL, 
 10. ¿Qué dice la regla de la no subversión (regla 12 de Codd)?
 
 *(Pista: todas las respuestas están en esta guía. Si dudas en alguna, vuelve a la sección correspondiente de los apuntes completos.)*
+
+
+#notaERRORES_MAS_COMUNES_EN_PRUEBAS_1
+-lunes y vierne rompe atomicidad
+-dni no ya que hay extranjeros , el numero de socio tenemos control en la base de datos y el dni no
+-para que sea clave candidata tiene que se superclave minima es decir que no se le pueda quitar ningun atributo
+

@@ -706,7 +706,7 @@ select
     duracion / 60.0 as minutos,
     reproducciones / 1000000.0 as millones_reproducciones,
     pais as donde_publicada
-from cancion
+from cancioncanc
 limit 3;
 ```
 Salida:

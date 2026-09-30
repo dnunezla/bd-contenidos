@@ -21,7 +21,13 @@ Escribe una consulta que calcule y devuelva una columna llamada `que_donde` que 
 
 Solución:
 ```sql
-
+select 
+upper(genero)||' '|| lower(pais) as que_donde,
+  round(me_gusta*100.0/reproducciones, 1) as porcentaje_me_gusta
+from cancion
+where lower(idioma) != 'es'
+order by porcentaje_me_gusta desc
+limit 10;
 
 ```
 
@@ -168,7 +174,18 @@ Para emitir una canción en la radio hay que añadirle una cuña publicitaria. E
 Solución:
 ```sql
 
-
+select distinct
+    titulo,
+	pais,
+	duracion,
+	case
+	   when lower(pais) = 'reino unido' then round((duracion+30) /60.0, 2)
+	   when lower(pais) = 'españa' then round((duracion+45)/60.0, 2)
+	   else NULL
+	end as duracion_radio_min
+from cancion
+order by duracion desc
+limit 20;
 ```
 
 Resultado:
@@ -311,7 +328,7 @@ Salida:
 
 | null = null |
 |-------------|
-|             |
+| null        |
 
 Código SQL:
 ```sql
@@ -321,7 +338,7 @@ Salida:
 
 | null != null |
 | ------------ |
-|              |
+| null         |
 
 - Si no conocemos los valores izquierdo y derecho, no sabemos si son iguales o no
 - Por lo tanto, el resultado es nulo (null)
@@ -371,7 +388,9 @@ Escribe una consulta para encontrar las canciones (`cancion`) cuya duración (`d
 
 Solución:
 ```sql
-
+select *
+from cancion
+where duracion is not null and idioma is null;
 
 ```
 
@@ -472,7 +491,11 @@ Escribe una consulta que devuelva todas las columnas de las canciones y añada u
 Solución:
 ```sql
 
-
+select *,
+   coalesce(duracion, reproducciones, me_gusta, valoracion, -1)as primer_dato
+from cancion
+order by id_cancion desc
+limit 10;
 ```
 
 Resultado:
@@ -492,6 +515,15 @@ Resultado:
 
 
 ---
+
+
+Escribe una consulta que cuente las canciones que **no** están en inglés, contando también aquellas cuyo idioma se desconoce.
+Solución:
+```sql
+
+
+```
+
 
 ## Funciones de agregación y cláusula de agrupación
 
@@ -544,7 +576,7 @@ Salida:
 	- Ignora las filas con valores nulos
 
 >[!question] Pregunta
->¿Qué devolverá la función `avg` si todos los valores son nulos?
+>¿Qué devolverá la función `avg` si todos los valores son nulos?  NULO
 
 ---
 

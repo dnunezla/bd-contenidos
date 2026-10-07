@@ -23,7 +23,12 @@ Escribe una consulta que devuelva el sueldo medio por departamento para departam
 
 Solución:
 ```sql
-
+ select 
+    dpto,
+    avg(sueldo)as sueldo_medio
+from empleado
+group by dpto
+having count(*)>1;
 ```
 
 Resultado:
@@ -242,7 +247,13 @@ Escribe una consulta para obtener el nombre, apellido1 y fechaNac de los emplead
 
 Solución:
 ```sql
-
+select 
+  nombre, 
+  apellido1, 
+  date(fechaNac, 'localtime') as fechaNac
+from empleado
+where date(fechaNac, 'localtime') between date('2025-01-01', '-70 year') 
+and date('2025-01-01','-59 year');
 ```
 
 Tabla resultado:

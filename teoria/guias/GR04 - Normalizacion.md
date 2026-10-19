@@ -96,6 +96,8 @@ A $X$ se le llama **determinante**.
 - DF2: $NumProyecto \to \{NombreP, UbicacionP\}$
 - DF3: $\{Dni, NumProyecto\} \to Horas$
 
+#nota12 LAS CLAVES SON DF DISFRAZADAS, CUMPLEN RELFREXIVIDAD (sabiendo el todo sé la parte), AUMENTO, TRANSISTIVIDAD
+
 ### 3.2. Tres ideas importantes
 
 1. **Las DF son semánticas, no estadísticas**: las define el significado de los datos y las reglas de negocio, no lo que casualmente contenga la tabla en un momento dado.

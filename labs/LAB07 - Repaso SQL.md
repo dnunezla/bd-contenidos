@@ -26,7 +26,13 @@ Escribe una consulta que muestre el nombre, apellido1 y sueldo de los empleados 
 
 Solución:
 ```sql
-
+SELECT distinct
+nombre,
+apellido1,
+sueldo
+from empleado
+where (sueldo between 25000 and 40000) and (nombre like 'A%' or nombre like 'J%')
+order by sueldo desc;
 ```
 
 **Tabla resultado:**
@@ -52,7 +58,14 @@ Escribe una consulta que muestre, para cada departamento, el número de empleado
 
 Solución:
 ```sql
-
+select 
+D.numero as dpto,
+count(E.dni) as num_empleados,
+sum(E.sueldo) as sueldo_total
+from departamento D join empleado E on E.dpto=D.numero
+group by D.numero
+having num_empleados >1
+order by sueldo_total desc;
 ```
 
 **Tabla resultado:**
@@ -76,7 +89,17 @@ Escribe una consulta que muestre el nombre y apellido1 del empleado, el nombre d
 
 Solución:
 ```sql
+select 
+E.nombre as nombre_empleado,
+E.apellido1,
+P.nombre as nombre_proyecto,
+D.nombre as nombre_departamento
+from empleado E join trabaja_en T on T.empleado= E.dni
+ join proyecto P on P.numero=T.proyecto
+ join departamento D on D.numero=P.dpto
 
+where E.apellido1 like 'P%'
+order by nombre_empleado asc;
 ```
 
 **Tabla resultado:**
@@ -106,7 +129,16 @@ Ordena por número de empleados descendente.
 
 Solución:
 ```sql
-
+select 
+  case 
+     when sueldo<30000 then 'Junior'
+     when sueldo between 30000 and 45000 then 'Senior'
+     when sueldo>45000  then 'Executive'
+  end as categoria_salarial,
+  count(dni) as num_empleados
+from empleado
+group by categoria_salarial  // va encontra de nuestras                              // normas 
+order by num_empleados desc;
 ```
 
 **Tabla resultado:**
@@ -136,7 +168,19 @@ Ordena por total de horas descendente y, luego, alfabéticamente por apellido y 
 
 Solución:
 ```sql
-
+with horas_empleado as(
+  select E.nombre, 
+  E.apellido1,
+  sum(T.horas) as total_horas
+  from empleado E join trabaja_en T on T.empleado=E.dni
+  group by E.dni
+  )
+ select nombre,
+ apellido1,
+ total_horas
+ from horas_empleado
+ where total_horas>30
+ order by total_horas desc, apellido1 asc;
 ```
 
 **Tabla resultado:**
@@ -165,7 +209,13 @@ Escribe una consulta que muestre el nombre de los departamentos que tienen al me
 
 Solución:
 ```sql
-
+select D.nombre as nombre_departamento
+from departamento D where exists (select 1 
+						        from empleado E join                          trabaja_en T on E.dni=T.empleado
+								where D.numero=E.dpto
+								group by E.dni
+								 having count(distinct T.proyecto)>1)
+order by nombre_departamento asc;
 ```
 
 **Tabla resultado:**
